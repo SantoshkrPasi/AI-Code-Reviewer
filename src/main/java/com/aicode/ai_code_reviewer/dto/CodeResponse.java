@@ -6,6 +6,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class CodeResponse {
- private String review;
+    private String bugs;
+    private String improvements;
+    private String optimization;
+    private String cleanCode;
+    private String rating;
 }

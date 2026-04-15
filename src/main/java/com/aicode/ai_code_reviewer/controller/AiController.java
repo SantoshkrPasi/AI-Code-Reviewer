@@ -6,6 +6,7 @@ import com.aicode.ai_code_reviewer.service.AiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/ai")
 public class AiController {
@@ -13,7 +14,7 @@ public class AiController {
     private AiService aiService;
     @PostMapping("/review")
     public CodeResponse review(@RequestBody CodeRequest codeRequest) {
-        return new CodeResponse(aiService.reviewCode(codeRequest.getCode(), codeRequest.getLanguage()));
+        return aiService.reviewCode(codeRequest.getCode(), codeRequest.getLanguage());
     }
 
 }

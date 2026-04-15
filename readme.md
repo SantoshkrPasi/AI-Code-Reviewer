@@ -18,3 +18,5 @@ com.aicode
 ├── service
 ├── dto
 └── config
+
+API KEY : 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
