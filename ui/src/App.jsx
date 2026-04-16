@@ -23,12 +23,17 @@ function App() {
         },
         body: JSON.stringify({ code, language })
       });
-
+      if (!res.ok) {
+          const err = await res.text();
+          alert(err);
+          setLoading(false);
+          return;
+        }
       const data = await res.json();
       setResult(data);
     } catch (err) {
       console.error(err);
-      alert("Backend error ⚠️");
+      alert("Network error ⚠️");
     }
 
     setLoading(false);

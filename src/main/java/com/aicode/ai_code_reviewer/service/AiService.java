@@ -56,6 +56,11 @@ public class AiService {
                 .header("X-Title", "AI Code Reviewer")
                 .bodyValue(body)
                 .retrieve()
+                .onStatus(status -> status.isError(), res ->
+                        reactor.core.publisher.Mono.error(
+                                new RuntimeException("AI API Error")
+                        )
+                )
                 .bodyToMono(String.class)
                 .block();
 
@@ -74,9 +79,7 @@ public class AiService {
             return mapper.readValue(content, CodeResponse.class);
 
         } catch (Exception e) {
-            return new CodeResponse(
-                    "Error", "Error", "Error", "Error", "Error"
-            );
+            throw new RuntimeException("AI failed: " + e.getMessage());
         }
     }
 }
